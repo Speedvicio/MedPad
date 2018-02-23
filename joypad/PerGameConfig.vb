@@ -7,11 +7,10 @@ Module PerGameConfig
         If MedPad.CheckBox1.Checked = True Then
             If File.Exists(MedPad.ConfigPath) = False Then MakeNewPerConfig() : Exit Sub
         End If
-
         Dim RowEx As Integer = 0
         If MedPad.PadInputName.Items.Count <= 0 Then Exit Sub
         Dim parclean As String = ""
-        parclean = Replace(MedPad.MedPar, "-", "")
+        parclean = MedPad.MedPar.Remove(0, 1)
         parclean = Replace(parclean, """", "")
         Dim SearchRow As String = ";" & MedPad.ComboConsole.Text & ", " & MedPad.ComboPort.Text & ", " & MedPad.ComboPad.Text &
                           ": " & MedPad.PadInputName.SelectedItem
@@ -39,7 +38,7 @@ Module PerGameConfig
 
         For Each myItem In MedPad.PadInputName.Items
             Dim controltry As Boolean = False
-            Using reader As New StreamReader(MedPad.MedPath & "\" & medpad.DMedConf & ".cfg")
+            Using reader As New StreamReader(MedPad.MedPath & "\" & MedPad.DMedConf & ".cfg")
                 While Not reader.EndOfStream
                     row = reader.ReadLine
                     count += 1
@@ -86,7 +85,6 @@ Module PerGameConfig
             File.WriteAllLines(MedPad.ConfigPath, Carray)
 
             MsgBox(MedPad.ComboPort.Text & " - " & MedPad.ComboPad.Text & " removed from config!" + vbOKOnly + vbInformation, "Removed Input...")
-
         Catch
         End Try
     End Sub

@@ -12,7 +12,7 @@ AGAIN:
             Using reader As New StreamReader(MedPad.MedPath & "\stdout.txt")
                 While Not reader.EndOfStream
                     row = reader.ReadLine
-                    If row.Contains("Joystick ") Then
+                    If row.Contains("Joystick ") Or row.Contains("ID: ") Then
                         MedPad.ListBox2.Items.Add(row.Trim)
                     End If
                 End While
@@ -153,7 +153,6 @@ AGAIN:
                 reader.Dispose()
                 reader.Close()
             End Using
-
 
             'If controltry = False Then
             'MedPad.InputAlreadyAssigned.Items.Add("Not Setted")

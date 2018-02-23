@@ -24,14 +24,15 @@ Public Class pnp
                     End If
                     'MedPad.ListBox1.Items.Add("XInput Unknown " & gamepad.GetType.Name & " GUID " & gamepad.GetType.GUID.ToString)
                 End If
-                    'SplitId = Split(devices.Item(count).DeviceID(), "&")
-                    'MedPad.ListBox3.Items.Add(devices.Item(count).Description() & " " & devices.Item(count).DeviceID())
-                    'MedPad.ListBox3.Items.Add(devices.Item(count).Description() & " " & SplitId(1).Replace("PID_", "") & " " & SplitId(0).Replace("HID\\VID_", ""))
-                    count += 1
+                'SplitId = Split(devices.Item(count).DeviceID(), "&")
+                'MedPad.ListBox3.Items.Add(devices.Item(count).Description() & " " & devices.Item(count).DeviceID())
+                'MedPad.ListBox3.Items.Add(devices.Item(count).Description() & " " & SplitId(1).Replace("PID_", "") & " " & SplitId(0).Replace("HID\\VID_", ""))
+                count += 1
             End If
         Next
 
         collection.Dispose()
         Return devices
     End Function
+
 End Class

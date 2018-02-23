@@ -16,6 +16,7 @@ Partial Public Class MedPad
     Private DevCaps As SlimDX.DirectInput.Capabilities
     Dim dinput As New DirectInput()
     Dim PadGUID As Guid
+    Dim Mousecode As String
     Dim assigned As Boolean
     Private fattemp = True
     Public firststart As Boolean
@@ -51,12 +52,12 @@ INMEDNAFEN:
             LoadPad()
             ParseCommandLineArgs()
 
-                If MCF.Text.Trim <> "" Then
-                    RefreshPad()
-                End If
-                ComboConsole.Text = console
-                ControlSpecificFileExist()
+            If MCF.Text.Trim <> "" Then
+                RefreshPad()
             End If
+            ComboConsole.Text = console
+            ControlSpecificFileExist()
+        End If
 
     End Sub
 
@@ -72,8 +73,10 @@ INMEDNAFEN:
 
                     If File.Exists(s.Remove(0, inputArgument.Length) & "\mednafen.cfg") Then
                         DMedConf = "mednafen"
+                        Mousecode = "0x0 "
                     ElseIf File.Exists(s.Remove(0, inputArgument.Length) & "\mednafen-09x.cfg") Then
                         DMedConf = "mednafen-09x"
+                        Mousecode = "0000000000000000 "
                     End If
 
                     MCF.Text = s.Remove(0, inputArgument.Length) & "\" & DMedConf & ".cfg"
@@ -330,7 +333,21 @@ BUTTON:
     Public Function ConverToMednafen(InputValue As Integer) As String
         Dim InpuToConvert As UInt32
         InpuToConvert = Convert.ToUInt32(InputValue)
-        ConverToMednafen = InpuToConvert.ToString("x8")
+        If DMedConf = "mednafen-09x" Then
+            ConverToMednafen = InpuToConvert.ToString("x8")
+        Else
+            Select Case InputValue
+                Case >= 32768
+                    ConverToMednafen = InpuToConvert.ToString("x8")
+                    If ConverToMednafen.Contains("0000800") Then
+                        ConverToMednafen = Replace(ConverToMednafen, "0000800", "abs_") & "+"
+                    ElseIf ConverToMednafen.Contains("0000c00") Then
+                        ConverToMednafen = Replace(ConverToMednafen, "0000c00", "abs_") & "-"
+                    End If
+                Case Else
+                    ConverToMednafen = "button_" & InputValue
+            End Select
+        End If
     End Function
 
     Public Sub ReleaseDevice()
@@ -540,7 +557,19 @@ BUTTON:
 
     Private Sub LaunchPar()
         If File.Exists(MedPath & "\mednafen.exe") = False Then Exit Sub
-        Process.Start(MedPath & "\mednafen.exe", MedPar)
+
+        Dim startInfo As ProcessStartInfo
+        startInfo = New ProcessStartInfo
+        startInfo.EnvironmentVariables("MEDNAFEN_NOPOPUPS") = "1"
+        startInfo.Arguments = MedPar
+        startInfo.FileName = MedPath & "\mednafen.exe"
+        startInfo.UseShellExecute = False
+        Dim shell As Process
+        shell = New Process
+        shell.StartInfo = startInfo
+        shell.Start()
+
+        'Process.Start(MedPath & "\mednafen.exe", MedPar)
         RealMedInput.Text = ""
         MedPar = ""
     End Sub
@@ -556,7 +585,16 @@ BUTTON:
                 Dim splitid() As String
                 splitpad = Split(ListBox2.SelectedItem, " ")
                 PadType = LCase(splitpad(0).Trim)
-                splitid = Split(ListBox2.SelectedItem, "Unique ID: ")
+                splitid = Split(ListBox2.SelectedItem, " ID:")
+
+                Dim i As Integer
+                If DMedConf = "mednafen" Then
+                    i = 0
+                Else
+                    i = 1
+                End If
+
+                splitid = Split(splitid(i), " ")
                 UniqueId = splitid(1).Trim
             End If
 
@@ -691,6 +729,8 @@ BUTTON:
             Case MouseButtons.XButton2
                 RealMedInput.Text = "00000006"
         End Select
+
+        ConvertNewMouse()
         MedMouse()
     End Sub
 
@@ -700,6 +740,8 @@ BUTTON:
         ElseIf e.Delta < 0 Then
             RealMedInput.Text = "00000004"
         End If
+
+        ConvertNewMouse()
         MedMouse()
     End Sub
 
@@ -719,27 +761,66 @@ BUTTON:
     End Sub
 
     Private Sub PictureBox1_MouseMove(sender As Object, e As MouseEventArgs) Handles PictureMouse.MouseMove
+        If DMedConf = "mednafen-09x" Then
+            If e.X > 0 And e.X < 90 Then
+                Select Case e.X
+                    Case < 25, > 75
+                        If e.Y > 40 And e.Y < 60 Then
+                            RealMedInput.Text = "00008000"
+                            ConvertNewMouse()
+                            MedMouse()
+                            Exit Sub
+                        End If
+                End Select
+            End If
 
-        If e.X > 0 And e.X < 90 Then
-            Select Case e.X
-                Case < 25, > 75
-                    If e.Y > 40 And e.Y < 60 Then
-                        RealMedInput.Text = "00008000"
-                        MedMouse()
-                        Exit Sub
-                    End If
-            End Select
-        End If
+            If e.Y > 0 And e.Y < 90 Then
+                Select Case e.Y
+                    Case < 25, > 75
+                        If e.X > 40 And e.X < 60 Then
+                            RealMedInput.Text = "00008001"
+                            ConvertNewMouse()
+                            MedMouse()
+                            Exit Sub
+                        End If
+                End Select
+            End If
+        Else
 
-        If e.Y > 0 And e.Y < 90 Then
-            Select Case e.Y
-                Case < 25, > 75
-                    If e.X > 40 And e.X < 60 Then
-                        RealMedInput.Text = "00008001"
-                        MedMouse()
-                        Exit Sub
-                    End If
-            End Select
+            If e.X > 0 And e.X < 90 Then
+                Select Case e.X
+                    Case > 75
+                        If e.Y > 40 And e.Y < 60 Then
+                            RealMedInput.Text = "rel_x+"
+                            MedMouse()
+                            Exit Sub
+                        End If
+                    Case < 25
+                        If e.Y > 40 And e.Y < 60 Then
+                            RealMedInput.Text = "rel_x-"
+                            MedMouse()
+                            Exit Sub
+                        End If
+                End Select
+            End If
+
+            If e.Y > 0 And e.Y < 90 Then
+                Select Case e.Y
+                    Case > 75
+                        If e.X > 40 And e.X < 60 Then
+                            RealMedInput.Text = "rel_y+"
+                            MedMouse()
+                            Exit Sub
+                        End If
+                    Case < 25
+                        If e.X > 40 And e.X < 60 Then
+                            RealMedInput.Text = "rel_y-"
+                            MedMouse()
+                            Exit Sub
+                        End If
+                End Select
+            End If
+
         End If
     End Sub
 
@@ -835,7 +916,7 @@ BUTTON:
     Private Sub MedMouse()
         If PadInputName.SelectedIndex < 0 Then Exit Sub
         If RealMedInput.Text.Trim <> "" And PadType = "mouse" Then
-            Dim prova As String = " " & Chr(34) & "mouse 0000000000000000 " & RealMedInput.Text & Chr(34)
+            Dim prova As String = " " & Chr(34) & "mouse " & Mousecode & RealMedInput.Text & Chr(34)
             AlreadyAssigned()
             If assigned = False Then
                 MedPar = MedPar.Trim & prova
@@ -849,6 +930,13 @@ BUTTON:
                 PadInputName.SetItemChecked(PadInputName.SelectedIndex, True)
             End If
             PadInputName.SelectedIndex = -1
+        End If
+    End Sub
+
+    Private Sub ConvertNewMouse()
+
+        If DMedConf = "mednafen" Then
+            RealMedInput.Text = Replace(RealMedInput.Text, "0000000", "button_")
         End If
     End Sub
 

@@ -689,6 +689,7 @@ BUTTON:
             Dim prova As String
             If vbkey = 46 Then
                 prova = " " & Chr(34) & Nothing & Chr(34)
+                RealMedInput.Text = ""
             Else
                 prova = " " & Chr(34) & "keyboard " & sdlKey & Chr(34)
             End If

@@ -26,7 +26,7 @@ MedPad can also create a per-config file for a specific game.
 ** Now you can open MedPad by opened 'Advanced MedGui Reborn Menu' (double right mouse click on the main rom grid)
 
 ## Video Tutorial
-* A viideo tutorial is availble on [Youtube](https://www.youtube.com/watch?v=hdc1PLYw0ho&list=PL6SV3kdlUgnECXxQzrIbCrbzo01sA1K60&index=3&t=0s)
+* A video tutorial is availble on [Youtube](https://www.youtube.com/watch?v=hdc1PLYw0ho&list=PL6SV3kdlUgnECXxQzrIbCrbzo01sA1K60&index=3&t=0s)
 
 ## Know Bug
 In any case MedPad detect a controller as direct input and Xinput,this can make troubles on configuration.

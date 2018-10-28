@@ -17,6 +17,10 @@ Module PerGameConfig
         Dim linee As String() = IO.File.ReadAllLines(MedPad.ConfigPath)
         For i As Integer = 0 To linee.Length - 1
             If linee(i) = (SearchRow) Then
+                If MedPad.CheckBox3.Checked = True And MedPad.DMedConf = "mednafen" Then
+                    Dim splitpar() As String = Split(linee(i + 1), " ")
+                    parclean = linee(i + 1) & " ||" & Replace(parclean, splitpar(0), Nothing)
+                End If
                 linee(i + 1) = parclean
                 RowEx += 1
             End If

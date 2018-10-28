@@ -673,6 +673,11 @@ BUTTON:
             RealMedInput.Focus()
             TimerControl.Stop()
             ReadParameter()
+            If InputAlreadyAssigned.SelectedItem.ToString <> "Not Setted" Then
+                CheckBox3.Enabled = True
+            Else
+                CheckBox3.Enabled = False
+            End If
             TimerControl.Interval = 1000 \ 24
             TimerControl.Start()
         End If

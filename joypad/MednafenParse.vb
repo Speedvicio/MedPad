@@ -146,6 +146,8 @@ AGAIN:
                                 MedPad.InputAlreadyAssigned.Items.Add(splitrow(1) & " " & splitrow(2))
                             Case 4
                                 MedPad.InputAlreadyAssigned.Items.Add(splitrow(1) & " " & splitrow(3))
+                            Case 8
+                                MedPad.InputAlreadyAssigned.Items.Add(splitrow(1) & " " & splitrow(3) & " + " & splitrow(5) & " " & splitrow(7))
                         End Select
                     End If
 
@@ -197,6 +199,8 @@ AGAIN:
                                 MedPad.InputAlreadyAssigned.Items.Add(splitrow(1) & " " & splitrow(2))
                             Case 4
                                 MedPad.InputAlreadyAssigned.Items.Add(splitrow(1) & " " & splitrow(3))
+                            Case 8
+                                MedPad.InputAlreadyAssigned.Items.Add(splitrow(1) & " " & splitrow(3) & " + " & splitrow(5) & " " & splitrow(7))
                         End Select
                     End If
                 End While

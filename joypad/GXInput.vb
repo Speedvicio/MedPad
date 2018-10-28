@@ -81,6 +81,7 @@ BUTTON:
         Dim PovAy As Integer
         Dim Bvalue As Integer
         Dim buttons As GamepadButtonFlags = Xstate.Gamepad.Buttons
+
         If buttons <> GamepadButtonFlags.None Then
             MedPad.OvalPicture.BackColor = Color.Transparent
             MedPad.OvalPicture.BackgroundImage = My.Resources.BDOWN

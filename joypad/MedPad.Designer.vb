@@ -49,6 +49,7 @@ Partial Class MedPad
         Me.ComboPad = New System.Windows.Forms.ComboBox()
         Me.ComboConsole = New System.Windows.Forms.ComboBox()
         Me.ListBox2 = New System.Windows.Forms.ListBox()
+        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -222,7 +223,7 @@ Partial Class MedPad
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(128, 17)
         Me.CheckBox1.TabIndex = 57
-        Me.CheckBox1.Text = "&Save Per Game Input"
+        Me.CheckBox1.Text = "Save &Per Game Input"
         Me.ToolTip1.SetToolTip(Me.CheckBox1, "Check This to Save a Per Game Input Configuration")
         Me.CheckBox1.UseVisualStyleBackColor = True
         '
@@ -318,6 +319,19 @@ Partial Class MedPad
         Me.ListBox2.Size = New System.Drawing.Size(427, 69)
         Me.ListBox2.TabIndex = 4
         Me.ToolTip1.SetToolTip(Me.ListBox2, "Recognized Gamepad By Mednafen")
+        '
+        'CheckBox3
+        '
+        Me.CheckBox3.AutoSize = True
+        Me.CheckBox3.Enabled = False
+        Me.CheckBox3.Location = New System.Drawing.Point(92, 380)
+        Me.CheckBox3.Name = "CheckBox3"
+        Me.CheckBox3.Size = New System.Drawing.Size(63, 17)
+        Me.CheckBox3.TabIndex = 61
+        Me.CheckBox3.Text = "&Append"
+        Me.ToolTip1.SetToolTip(Me.CheckBox3, "Add another input to main input")
+        Me.CheckBox3.UseVisualStyleBackColor = True
+        Me.CheckBox3.Visible = False
         '
         'Label19
         '
@@ -572,6 +586,7 @@ Partial Class MedPad
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.CheckBox3)
         Me.GroupBox3.Controls.Add(Me.CheckBox2)
         Me.GroupBox3.Controls.Add(Me.Button4)
         Me.GroupBox3.Controls.Add(Me.SpecificGame)
@@ -783,4 +798,5 @@ Partial Class MedPad
     Friend WithEvents SpecialInput As ContextMenuStrip
     Friend WithEvents UnassignedAllInputToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RemoveThisPadFromConfigToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CheckBox3 As CheckBox
 End Class

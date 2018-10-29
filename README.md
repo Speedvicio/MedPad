@@ -25,6 +25,15 @@ MedPad can also create a per-config file for a specific game.
 * Extract the archive in the main folder where MedGuiR.exe is located on the sub folder '\MedGuiR\Plugins\Controller'<br>
 ** Now you can open MedPad by opened 'Advanced MedGui Reborn Menu' (double right mouse click on the main rom grid)
 
+## Interact by Command Line
+Users can interact with MedPad by command line, it should be useful for set mednafen pad by others GUI/Frontend.
+* The available parameters are -folder= ; -console= ; -file=
+* Users can pass parameters in this way:<br> 
+  medpad -folder="mednafen folder path" -console="mednafen module name" -file="file name without extension"<br>
+** -console= ; -file= , are optional parameters and are useful to create a per config game pad profile
+* Example:<br>
+     medpad -folder="D:\Mednafen" -console="nes" -file="Super Mario Bros (EUR)"
+
 ## Video Tutorial
 * A video tutorial is availble on [Youtube](https://www.youtube.com/watch?v=hdc1PLYw0ho&list=PL6SV3kdlUgnECXxQzrIbCrbzo01sA1K60&index=3&t=0s)
 

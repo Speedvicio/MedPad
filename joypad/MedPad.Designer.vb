@@ -303,10 +303,11 @@ Partial Class MedPad
         'ComboConsole
         '
         Me.ComboConsole.FormattingEnabled = True
-        Me.ComboConsole.Items.AddRange(New Object() {"cdplay", "demo", "gb", "gba", "gg", "lynx", "md", "nes", "ngp", "pce", "pce_fast", "pcfx", "psx", "sms", "snes", "snes_faust", "ss", "vb", "wswan"})
+        Me.ComboConsole.Items.AddRange(New Object() {"apple2", "cdplay", "demo", "gb", "gba", "gg", "lynx", "md", "nes", "ngp", "pce", "pce_fast", "pcfx", "psx", "sms", "snes", "snes_faust", "ss", "vb", "wswan"})
         Me.ComboConsole.Location = New System.Drawing.Point(9, 180)
         Me.ComboConsole.Name = "ComboConsole"
         Me.ComboConsole.Size = New System.Drawing.Size(175, 21)
+        Me.ComboConsole.Sorted = True
         Me.ComboConsole.TabIndex = 43
         Me.ToolTip1.SetToolTip(Me.ComboConsole, "Select A Module (Console)")
         '

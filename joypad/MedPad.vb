@@ -11,7 +11,7 @@ Partial Public Class MedPad
     Private state As New JoystickState()
     Private numPOVs As Integer
     Public MedPar, MedPath, UniqueId, PadType, ConfigPath As String
-    Public specificfile, console As String
+    Public specificfile, console, portpad As String
     Private SliderCount As Integer
     Private DevCaps As SlimDX.DirectInput.Capabilities
     Dim dinput As New DirectInput()
@@ -56,6 +56,7 @@ INMEDNAFEN:
                 RefreshPad()
             End If
             ComboConsole.Text = console
+            ComboPort.Text = portpad
             ControlSpecificFileExist()
         End If
 
@@ -83,6 +84,9 @@ INMEDNAFEN:
                 Case s.ToLower.Contains("-console=")
                     inputArgument = "-console="
                     console = s.Remove(0, inputArgument.Length)
+                Case s.ToLower.Contains("-port=")
+                    inputArgument = "-port="
+                    portpad = s.Remove(0, inputArgument.Length)
                 Case s.ToLower.Contains("-file=")
                     inputArgument = "-file="
                     SpecificGame.Text = s.Remove(0, inputArgument.Length)

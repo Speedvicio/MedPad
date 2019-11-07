@@ -355,17 +355,21 @@ BUTTON:
     End Function
 
     Public Sub ReleaseDevice()
-        TimerDInput.[Stop]()
+        Try
+            TimerDInput.[Stop]()
 
-        If joystick IsNot Nothing Then
-            joystick.Unacquire()
-            joystick.Dispose()
-        End If
-        joystick = Nothing
-        mouse = Nothing
+            If joystick IsNot Nothing Then
+                joystick.Unacquire()
+                joystick.Dispose()
+            End If
+            joystick = Nothing
+            mouse = Nothing
+        Catch ex As Exception
+            'MsgBox(ex.ToString, vbOKOnly)
+        End Try
     End Sub
 
-    Private Sub LoadPad()
+    Public Sub LoadPad()
         ReleaseDevice()
         Dim attached As Integer = 0
 

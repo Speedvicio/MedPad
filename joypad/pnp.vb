@@ -37,7 +37,8 @@ Public Class pnp
             Return devices
 
         Catch ex As Exception
-            MsgBox(ex.ToString, vbOKOnly)
+            'MsgBox(ex.ToString, vbOKOnly)
+        Finally
             MedPad.CheckBox2.Checked = True
             MedPad.LoadPad()
         End Try

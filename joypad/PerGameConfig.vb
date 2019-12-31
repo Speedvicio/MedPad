@@ -40,6 +40,12 @@ Module PerGameConfig
         Dim row As String
         Dim file As StreamWriter
 
+        Dim objWriter As New StreamWriter(MedPad.MedPath & "\pgconfig\" & MedPad.SpecificGame.Text & "." & MedPad.ComboConsole.Text & ".cfg", True)
+        objWriter.WriteLine("")
+        objWriter.WriteLine("; << Specific Input Config >>")
+        objWriter.WriteLine("")
+        objWriter.Close()
+
         For Each myItem In MedPad.PadInputName.Items
             Dim controltry As Boolean = False
             Using reader As New StreamReader(MedPad.MedPath & "\" & MedPad.DMedConf & ".cfg")

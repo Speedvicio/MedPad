@@ -23,6 +23,20 @@ Partial Public Class MedPad
     Public DMedConf As String
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        If File.Exists(Path.Combine(Application.StartupPath, "mm.txt")) Then
+            ComboConsole.Items.Clear()
+            Dim reader As StreamReader = My.Computer.FileSystem.OpenTextFileReader(Path.Combine(Application.StartupPath, "mm.txt"))
+            Dim a As String
+            Do
+                a = reader.ReadLine
+                If a <> Nothing Then
+                    ComboConsole.Items.Add(a.Trim)
+                End If
+            Loop Until a Is Nothing
+            reader.Close()
+        End If
+
         'JButtons.Parent = OvalPicture
         firststart = True
         Dim process_med() As Process
@@ -681,10 +695,12 @@ BUTTON:
             RealMedInput.Focus()
             TimerControl.Stop()
             ReadParameter()
-            If InputAlreadyAssigned.SelectedItem.ToString <> "Not Setted" Then
-                CheckBox3.Enabled = True
-            Else
-                CheckBox3.Enabled = False
+            If InputAlreadyAssigned.SelectedItem <> Nothing Then
+                If InputAlreadyAssigned.SelectedItem.ToString <> "Not Setted" Then
+                    CheckBox3.Enabled = True
+                Else
+                    CheckBox3.Enabled = False
+                End If
             End If
             TimerControl.Interval = 1000 \ 24
             TimerControl.Start()

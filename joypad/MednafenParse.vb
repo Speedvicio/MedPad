@@ -13,13 +13,6 @@ AGAIN:
                 While Not reader.EndOfStream
                     row = reader.ReadLine
 
-                    If row.Contains("Multiple instances of Mednafen") Then
-                        reader.Dispose()
-                        reader.Close()
-                        MedPad.Button3.PerformClick()
-                        Exit Sub
-                    End If
-
                     If row.Contains("Joystick ") Or row.Contains("ID: ") Then
                         MedPad.ListBox2.Items.Add(row.Trim)
                     End If

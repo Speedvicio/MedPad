@@ -35,12 +35,13 @@ Public Class pnp
 
             collection.Dispose()
             Return devices
-
         Catch ex As Exception
             'MsgBox(ex.ToString, vbOKOnly)
-        Finally
             MedPad.CheckBox2.Checked = True
             MedPad.LoadPad()
+        Finally
+            'MedPad.CheckBox2.Checked = True
+            'MedPad.LoadPad()
         End Try
     End Function
 

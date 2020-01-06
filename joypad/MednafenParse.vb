@@ -12,7 +12,6 @@ AGAIN:
             Using reader As New StreamReader(MedPad.MedPath & "\stdout.txt")
                 While Not reader.EndOfStream
                     row = reader.ReadLine
-
                     If row.Contains("Joystick ") Or row.Contains("ID: ") Then
                         MedPad.ListBox2.Items.Add(row.Trim)
                     End If
@@ -23,8 +22,8 @@ AGAIN:
             MedPad.ListBox2.Items.Add("Mouse")
         Catch
             If CAgain < 10 Then
-                GoTo AGAIN
                 CAgain += 1
+                GoTo AGAIN
             Else
                 MsgBox("There is some problem in intercepting your pads." & vbCrLf &
                        "If you have Mednafen started try to close it, otherwise try to enable forced recognition of pads via Direct Input", vbOKOnly + MsgBoxStyle.Exclamation, "Unrecognized Pad...")

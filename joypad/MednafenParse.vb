@@ -7,6 +7,7 @@ Module MednafenParse
         MedPad.ListBox2.Items.Clear()
         Dim CAgain As Integer = 0
         Dim row As String
+
 AGAIN:
         Try
             Using reader As New StreamReader(MedPad.MedPath & "\stdout.txt")
@@ -21,12 +22,14 @@ AGAIN:
             End Using
             MedPad.ListBox2.Items.Add("Mouse")
         Catch
-            If CAgain < 10 Then
+            If CAgain < 50 Then
                 CAgain += 1
                 GoTo AGAIN
             Else
-                MsgBox("There is some problem in intercepting your pads." & vbCrLf &
-                       "If you have Mednafen started try to close it, otherwise try to enable forced recognition of pads via Direct Input", vbOKOnly + MsgBoxStyle.Exclamation, "Unrecognized Pad...")
+                MsgBox("There are problems in intercepting the joypads detected by mednafen." & vbCrLf &
+                       "If you have Mednafen started try to close it," & vbCrLf &
+                       "otherwise try to enable forced recognition of pads via Direct Input" & vbCrLf &
+                       "and press refresh button", vbOKOnly + MsgBoxStyle.Exclamation, "Unrecognized Pad...")
                 Exit Sub
             End If
         End Try
@@ -36,7 +39,7 @@ AGAIN:
                 MedPad.firststart = False
                 MedPad.Button3.PerformClick()
             Else
-                MsgBox("MedPad has detected more pads than it has detected Mednafen." & vbCrLf & "Try pressing the MedPad refresh button, otherwise unplug and reconnect the pads and press again refresh button." & vbCrLf &
+                MsgBox("MedPad has detected more pads that Mednafen has detected ." & vbCrLf & "Try pressing the MedPad refresh button, otherwise unplug and reconnect the pads and press again refresh button." & vbCrLf &
                        "Try also to force Direct Input Detection and press again refresh button", vbOKOnly + vbInformation, "Refresh Connected Pad...")
             End If
         End If

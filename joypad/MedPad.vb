@@ -594,6 +594,8 @@ BUTTON:
         'Process.Start(MedPath & "\mednafen.exe", MedPar)
         RealMedInput.Text = ""
         MedPar = ""
+
+        Thread.Sleep(3000)
     End Sub
 
     Private Sub ListBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox2.SelectedIndexChanged

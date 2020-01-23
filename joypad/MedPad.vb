@@ -639,6 +639,7 @@ BUTTON:
             ComboPad.Items.Clear()
             ComboPad.Text = ""
             ParseTypePad()
+            Server.Close()
         End If
     End Sub
 

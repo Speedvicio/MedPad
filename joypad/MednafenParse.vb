@@ -45,12 +45,20 @@ AGAIN:
         End If
     End Sub
 
+    Private Sub PopUpServer()
+        Server.Text = "Waiting..."
+        Server.Label1.Text = "Parsing all input data"
+        Server.Show()
+        Application.DoEvents()
+    End Sub
+
     Public Sub ParseTypePad()
         MedPad.PadInputName.Items.Clear()
         MedPad.InputAlreadyAssigned.Items.Clear()
         Dim row, splitrow() As String
         Try
             Using reader As New StreamReader(MedPad.MedPath & "\" & MedPad.DMedConf & ".cfg")
+                PopUpServer()
                 While Not reader.EndOfStream
                     row = reader.ReadLine
                     If row.Contains(";" & MedPad.ComboConsole.Text & ",") Then
@@ -68,6 +76,7 @@ AGAIN:
 
             If MedPad.ComboPort.Items.Count > 0 Then MedPad.ComboPort.SelectedIndex = 0
         Catch
+            Server.Close()
         End Try
     End Sub
 
@@ -76,6 +85,8 @@ AGAIN:
         Dim row, splitrow(), splitrow1() As String
         Try
             Using reader As New StreamReader(MedPad.MedPath & "\" & MedPad.DMedConf & ".cfg")
+                PopUpServer()
+
                 While Not reader.EndOfStream
                     row = reader.ReadLine
                     If row.Contains(";" & MedPad.ComboConsole.Text & ", " & MedPad.ComboPort.Text & ", ") Then
@@ -94,6 +105,7 @@ AGAIN:
 
             If MedPad.ComboPad.Items.Count > 0 Then MedPad.ComboPad.SelectedIndex = 0
         Catch
+            Server.Close()
         End Try
 
     End Sub
@@ -103,6 +115,8 @@ AGAIN:
         Dim row, splitrow(), splitrow1() As String
         Try
             Using reader As New StreamReader(MedPad.MedPath & "\" & MedPad.DMedConf & ".cfg")
+                PopUpServer()
+
                 While Not reader.EndOfStream
                     row = reader.ReadLine
                     If row.Contains(";" & MedPad.ComboConsole.Text & ", " & MedPad.ComboPort.Text & ", " & MedPad.ComboPad.Text & ": ") Then
@@ -122,6 +136,8 @@ AGAIN:
                 reader.Close()
             End Using
         Catch
+        Finally
+            Server.Close()
         End Try
     End Sub
 

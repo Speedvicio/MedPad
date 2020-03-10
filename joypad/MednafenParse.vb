@@ -10,28 +10,33 @@ Module MednafenParse
 
 AGAIN:
         Try
-            Using reader As New StreamReader(MedPad.MedPath & "\stdout.txt")
-                While Not reader.EndOfStream
-                    row = reader.ReadLine
-                    If row.Contains("Joystick ") Or row.Contains("ID: ") Then
-                        MedPad.ListBox2.Items.Add(row.Trim)
-                    End If
-                End While
-                reader.Dispose()
-                reader.Close()
-            End Using
-            MedPad.ListBox2.Items.Add("Mouse")
-        Catch
-            If CAgain < 50 Then
-                CAgain += 1
-                GoTo AGAIN
+            Dim C_proc() As Process
+            C_proc = Process.GetProcessesByName("mednafen", My.Computer.Name)
+
+            If C_proc.Length = 0 Then
+                Using reader As New StreamReader(MedPad.MedPath & "\stdout.txt")
+                    While Not reader.EndOfStream
+                        row = reader.ReadLine
+                        If row.Contains("Joystick ") Or row.Contains("ID: ") Then
+                            MedPad.ListBox2.Items.Add(row.Trim)
+                        End If
+                    End While
+                    'reader.Dispose()
+                    reader.Close()
+                    MedPad.ListBox2.Items.Add("Mouse")
+                End Using
             Else
-                MsgBox("There are problems in intercepting the joypads detected by mednafen." & vbCrLf &
-                       "If you have Mednafen started try to close it," & vbCrLf &
-                       "otherwise try to enable forced recognition of pads via Direct Input" & vbCrLf &
-                       "and press refresh button", vbOKOnly + MsgBoxStyle.Exclamation, "Unrecognized Pad...")
-                Exit Sub
+                CAgain += 1
+                If CAgain > 500 Then
+                    MsgBox("There are problems in intercepting the joypads detected by mednafen." & vbCrLf &
+                              "If you have Mednafen started try to close it," & vbCrLf &
+                             "otherwise try to enable forced recognition of pads via Direct Input" & vbCrLf &
+                            "and press refresh button", vbOKOnly + MsgBoxStyle.Exclamation, "Unrecognized Pad...")
+                    Exit Sub
+                End If
+                GoTo AGAIN
             End If
+        Catch
         End Try
 
         If MedPad.ListBox1.Items.Count <> MedPad.ListBox2.Items.Count Then

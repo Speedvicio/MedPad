@@ -39,6 +39,7 @@ Partial Public Class MedPad
 
         'JButtons.Parent = OvalPicture
         firststart = True
+
         Dim process_med() As Process
         process_med = Process.GetProcessesByName("mednafen", My.Computer.Name)
         If process_med.Length > 0 Then

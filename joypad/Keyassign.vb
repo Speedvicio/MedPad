@@ -679,4 +679,431 @@
         sdlKey = "0x0 " & sdlKey
     End Sub
 
+    Public Function TransKeyToScan_Code(ScanCode)
+        If ScanCode.ToString.Contains("Not Setted") Then MedPad.JButtons.Text = "" : Exit Function
+
+        If ScanCode.ToString.StartsWith("keyboard ") = False Then MedPad.JButtons.Text = "" : Exit Function
+
+        ScanCode = ScanCode.Replace("keyboard ", "")
+
+        Select Case ScanCode
+
+            Case 41
+                MedPad.JButtons.Text = "Esc"
+            Case 58
+                MedPad.JButtons.Text = "F1"
+            Case 59
+                MedPad.JButtons.Text = "F2"
+            Case 60
+                MedPad.JButtons.Text = "F3"
+            Case 61
+                MedPad.JButtons.Text = "F4"
+            Case 62
+                MedPad.JButtons.Text = "F5"
+            Case 63
+                MedPad.JButtons.Text = "F6"
+            Case 64
+                MedPad.JButtons.Text = "F7"
+            Case 65
+                MedPad.JButtons.Text = "F8"
+            Case 66
+                MedPad.JButtons.Text = "F9"
+            Case 67
+                MedPad.JButtons.Text = "F10"
+            Case 68
+                MedPad.JButtons.Text = "F11"
+            Case 69
+                MedPad.JButtons.Text = "F12"
+            Case 30
+                MedPad.JButtons.Text = "1"
+            Case 31
+                MedPad.JButtons.Text = "2"
+            Case 32
+                MedPad.JButtons.Text = "3"
+
+'D4
+            Case 33
+                MedPad.JButtons.Text = "4"
+
+'D5
+            Case 34
+                MedPad.JButtons.Text = "5"
+
+'D6
+            Case 35
+                MedPad.JButtons.Text = "6"
+
+'D7
+            Case 36
+                MedPad.JButtons.Text = "7"
+
+'D8
+            Case 37
+                MedPad.JButtons.Text = "8"
+
+'D9
+            Case 38
+                MedPad.JButtons.Text = "9"
+
+'D0
+            Case 39
+                MedPad.JButtons.Text = "0"
+
+'Q
+            Case 20
+                MedPad.JButtons.Text = "Q"
+
+'W
+            Case 26
+                MedPad.JButtons.Text = "W"
+
+'E
+            Case 8
+                MedPad.JButtons.Text = "E"
+
+'R
+            Case 21
+                MedPad.JButtons.Text = "R"
+
+'T
+            Case 23
+                MedPad.JButtons.Text = "T"
+
+'Y
+            Case 28
+                MedPad.JButtons.Text = "Y"
+
+'U
+            Case 24
+                MedPad.JButtons.Text = "U"
+
+'I
+            Case 12
+                MedPad.JButtons.Text = "I"
+
+'O
+            Case 18
+                MedPad.JButtons.Text = "O"
+
+'P
+            Case 19
+                MedPad.JButtons.Text = "P"
+
+'A
+            Case 4
+                MedPad.JButtons.Text = "A"
+
+'S
+            Case 22
+                MedPad.JButtons.Text = "S"
+
+'D
+            Case 7
+                MedPad.JButtons.Text = "D"
+
+'F
+            Case 9
+                MedPad.JButtons.Text = "F"
+
+'G
+            Case 10
+                MedPad.JButtons.Text = "G"
+
+'H
+            Case 11
+                MedPad.JButtons.Text = "H"
+
+'J
+            Case 13
+                MedPad.JButtons.Text = "J"
+
+'K
+            Case 14
+                MedPad.JButtons.Text = "K"
+
+'L
+            Case 15
+                MedPad.JButtons.Text = "L"
+
+'Z
+            Case 29
+                MedPad.JButtons.Text = "Z"
+
+'X
+            Case 27
+                MedPad.JButtons.Text = "X"
+
+'C
+            Case 6
+                MedPad.JButtons.Text = "C"
+
+'V
+            Case 25
+                MedPad.JButtons.Text = "V"
+
+'B
+            Case 5
+                MedPad.JButtons.Text = "B"
+
+'N
+            Case 17
+                MedPad.JButtons.Text = "N"
+
+'M
+            Case 16
+                MedPad.JButtons.Text = "M"
+
+'Backslash
+            Case 49
+                MedPad.JButtons.Text = "\"
+
+'Back
+            Case 42
+                MedPad.JButtons.Text = "BACK"
+
+'Tab
+            Case 43
+                MedPad.JButtons.Text = "TAB"
+
+'Return
+            Case 40
+                MedPad.JButtons.Text = "RETURN"
+
+'Capital
+            Case 57
+                MedPad.JButtons.Text = "CAPS"
+
+'[
+            Case 47
+                MedPad.JButtons.Text = "["
+
+']
+            Case 48
+                MedPad.JButtons.Text = "]"
+
+';
+            Case 51
+                MedPad.JButtons.Text = ";"
+
+'tilde
+            Case 100
+                MedPad.JButtons.Text = "~"
+
+''
+            Case 52
+                MedPad.JButtons.Text = "'"
+
+'ShiftKey
+            Case 225
+                MedPad.JButtons.Text = "SHIFT"
+
+'Bracket
+            Case 47
+                MedPad.JButtons.Text = "BRACKET"
+
+'comma
+            Case 54
+                MedPad.JButtons.Text = ","
+
+'Period
+            Case 55
+                MedPad.JButtons.Text = "."
+
+'Question
+            Case 191
+                'sdl =
+
+'ControlKey
+            Case 224
+                MedPad.JButtons.Text = "CTRL"
+
+'LWin
+            Case 227
+                MedPad.JButtons.Text = "LWIN"
+
+'Alt
+            Case 226
+                MedPad.JButtons.Text = "ALT"
+
+'Space
+            Case 44
+                MedPad.JButtons.Text = "SPACE"
+
+'RWin
+            Case 231
+                MedPad.JButtons.Text = "RWIN"
+
+'Apps
+            Case 101
+                'MedPad.JButtons.Text =
+
+'PrintScreen
+            Case 70
+                MedPad.JButtons.Text = "PRINT"
+
+'Scroll
+            Case 145
+                MedPad.JButtons.Text = "SCROLL"
+
+'Pause
+            Case 72
+                MedPad.JButtons.Text = "PAUSE"
+
+'Insert
+            Case 73
+                MedPad.JButtons.Text = "INS"
+
+'Home
+            Case 74
+                MedPad.JButtons.Text = "HOME"
+
+'PageUp
+            Case 75
+                MedPad.JButtons.Text = "PAGEUP"
+
+'PageDown
+            Case 78
+                MedPad.JButtons.Text = "PAGEDOWN"
+
+'End
+            Case 77
+                MedPad.JButtons.Text = "END"
+
+'Delete
+            Case 76
+                MedPad.JButtons.Text = "DEL"
+
+'Up
+            Case 82
+                MedPad.JButtons.Text = "UP"
+
+'Down
+            Case 81
+                MedPad.JButtons.Text = "DOWN"
+
+'Left
+            Case 80
+                MedPad.JButtons.Text = "LEFT"
+
+'Right
+            Case 79
+                MedPad.JButtons.Text = "RIGHT"
+
+'SelectMedia
+            Case 263
+                MedPad.JButtons.Text = "SelectMedia"
+
+'VolumeMute
+            Case 262
+                MedPad.JButtons.Text = "VolumeMute"
+
+'VolumeDown
+            Case 129
+                MedPad.JButtons.Text = "VolumeDown"
+
+'VolumeUp
+            Case 128
+                MedPad.JButtons.Text = "VolumeUp"
+
+'MediaStop
+            Case 260
+                MedPad.JButtons.Text = "MediaStop"
+
+'MediaPreviousTrack
+            Case 259
+                MedPad.JButtons.Text = "Previous"
+
+'MediaPlayPause
+            Case 261
+                MedPad.JButtons.Text = "PlayPause"
+
+'MediaNextTrack
+            Case 258
+                MedPad.JButtons.Text = "Next"
+
+'LaunchMail
+            Case 265
+                MedPad.JButtons.Text = "Mail"
+
+'BrowserHome
+            Case 264
+                MedPad.JButtons.Text = "Browser"
+
+'LaunchApplication2
+            Case 183
+                'sdl =
+
+'NumLock
+            Case 83
+                MedPad.JButtons.Text = "NUMLOCK"
+
+'KP_0
+            Case 98
+                MedPad.JButtons.Text = "KEYPAD 0"
+
+'KP_1
+            Case 89
+                MedPad.JButtons.Text = "KEYPAD 1"
+
+'KP_2
+            Case 90
+                MedPad.JButtons.Text = "KEYPAD 2"
+
+'KP_3
+            Case 91
+                MedPad.JButtons.Text = "KEYPAD 3"
+
+'KP_4
+            Case 92
+                MedPad.JButtons.Text = "KEYPAD 4"
+
+'KP_5
+            Case 93
+                MedPad.JButtons.Text = "KEYPAD 5"
+
+'KP_6
+            Case 94
+                MedPad.JButtons.Text = "KEYPAD 6"
+
+'KP_7
+            Case 95
+                MedPad.JButtons.Text = "KEYPAD 7"
+
+'KP_8
+            Case 96
+                MedPad.JButtons.Text = "KEYPAD 8"
+
+'KP_9
+            Case 97
+                MedPad.JButtons.Text = "KEYPAD 9"
+
+'Divide
+            Case 84
+                MedPad.JButtons.Text = "KEYPAD /"
+
+'Multiply
+            Case 85
+                MedPad.JButtons.Text = "KEYPAD *"
+
+'Subtract
+            Case 86
+                MedPad.JButtons.Text = "KEYPAD -"
+
+'Add
+            Case 87
+                MedPad.JButtons.Text = "KEYPAD +"
+
+'Decimal
+            Case 220
+                MedPad.JButtons.Text = "KEYPAD ."
+
+'Clear
+            Case 156
+                MedPad.JButtons.Text = "CLEAR"
+            Case Else
+                MedPad.JButtons.Text = ""
+        End Select
+
+    End Function
+
 End Module

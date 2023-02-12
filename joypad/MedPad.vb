@@ -1000,4 +1000,8 @@ BUTTON:
         ReleaseDevice()
     End Sub
 
+    Private Sub InputAlreadyAssigned_SelectedIndexChanged(sender As Object, e As EventArgs) Handles InputAlreadyAssigned.SelectedIndexChanged
+        TransKeyToScan_Code(InputAlreadyAssigned.SelectedItem.ToString)
+    End Sub
+
 End Class

@@ -137,9 +137,12 @@ BUTTON:
             MedPad.RealMedInput.Text = MedPad.ConverToMednafen(Bvalue)
             MedPad.JButtons.Text = buttons.ToString
         Else
-            If MedPad.InputAlreadyAssigned.SelectedItem.ToString.StartsWith("keyboard ") Then
-            Else
-                MedPad.JButtons.Text = ""
+            If MedPad.InputAlreadyAssigned.Items.Count > 0 And MedPad.InputAlreadyAssigned.SelectedItem IsNot Nothing Then
+
+                If MedPad.InputAlreadyAssigned.SelectedItem.ToString.StartsWith("keyboard ") Then
+                Else
+                    MedPad.JButtons.Text = ""
+                End If
             End If
         End If
 

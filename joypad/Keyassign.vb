@@ -685,6 +685,7 @@
         If ScanCode.ToString.StartsWith("keyboard ") = False Then MedPad.JButtons.Text = "" : Exit Function
 
         ScanCode = ScanCode.Replace("keyboard ", "")
+        If ScanCode.ToString.Length > 3 Then Exit Function
 
         Select Case ScanCode
 

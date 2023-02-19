@@ -189,20 +189,20 @@ Partial Class MedPad
         '
         Me.SpecialInput.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UnassignedAllInputToolStripMenuItem, Me.RemoveThisPadFromConfigToolStripMenuItem})
         Me.SpecialInput.Name = "SpecialInput"
-        Me.SpecialInput.Size = New System.Drawing.Size(236, 48)
+        Me.SpecialInput.Size = New System.Drawing.Size(235, 70)
         '
         'UnassignedAllInputToolStripMenuItem
         '
         Me.UnassignedAllInputToolStripMenuItem.Enabled = False
         Me.UnassignedAllInputToolStripMenuItem.Name = "UnassignedAllInputToolStripMenuItem"
-        Me.UnassignedAllInputToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
+        Me.UnassignedAllInputToolStripMenuItem.Size = New System.Drawing.Size(234, 22)
         Me.UnassignedAllInputToolStripMenuItem.Text = "&Unassigned All Input"
         '
         'RemoveThisPadFromConfigToolStripMenuItem
         '
         Me.RemoveThisPadFromConfigToolStripMenuItem.Enabled = False
         Me.RemoveThisPadFromConfigToolStripMenuItem.Name = "RemoveThisPadFromConfigToolStripMenuItem"
-        Me.RemoveThisPadFromConfigToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
+        Me.RemoveThisPadFromConfigToolStripMenuItem.Size = New System.Drawing.Size(234, 22)
         Me.RemoveThisPadFromConfigToolStripMenuItem.Text = "&Remove This Pad From Config"
         '
         'Button1

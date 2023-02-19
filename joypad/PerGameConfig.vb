@@ -42,7 +42,7 @@ Module PerGameConfig
 
         Dim objWriter As New StreamWriter(MedPad.MedPath & "\pgconfig\" & MedPad.SpecificGame.Text & "." & MedPad.ComboConsole.Text & ".cfg", True)
         objWriter.WriteLine("")
-        objWriter.WriteLine("; << Specific Input Config >>")
+        objWriter.WriteLine("; << Specific Input Config " & MedPad.ComboPort.Text & " - " & MedPad.ComboPad.Text & " >>")
         objWriter.WriteLine("")
         objWriter.Close()
 
@@ -56,7 +56,7 @@ Module PerGameConfig
                         file = My.Computer.FileSystem.OpenTextFileWriter(MedPad.MedPath & "\pgconfig\" & MedPad.SpecificGame.Text & "." & MedPad.ComboConsole.Text & ".cfg", True)
                         file.WriteLine(row)
                         Dim splitclean() = Split(readNthLine(MedPad.MedPath & "\" & MedPad.DMedConf & ".cfg", count), " ")
-                        file.WriteLine(splitclean(0))
+                        file.WriteLine(splitclean(0) & " ")
                         file.Close()
                         Exit While
                     End If
@@ -66,7 +66,7 @@ Module PerGameConfig
             End Using
             count = 0
         Next
-        MsgBox("Added values for " & MedPad.ComboPort.Text & " - " & MedPad.ComboPad.Text, MsgBoxStyle.OkOnly + vbInformation, "File Maked...")
+        MsgBox("Entered the default parameters for " & MedPad.SpecificGame.Text, MsgBoxStyle.OkOnly + vbInformation, "Per-Game file Maked...")
         MedPad.ControlSpecificFileExist()
     End Sub
 

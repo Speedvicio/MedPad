@@ -19,6 +19,7 @@ Partial Public Class MedPad
     Dim Mousecode As String
     Dim assigned As Boolean
     Private fattemp = True
+    Public SetPadMednafen As Boolean
     Public firststart As Boolean
     Public DMedConf As String
 
@@ -652,6 +653,16 @@ BUTTON:
         ParseNameListInput()
         ControlSpecificFileExist()
         AssignedInputValue()
+
+        If ComboPad.Items.Count > 1 Then
+            Label8.Text = "Enable " & ComboPad.Text & " as default " & vbCrLf &
+            UCase(ComboConsole.Text) & " pad on " & ComboPort.Text
+            Button5.Enabled = True
+        Else
+            Label8.Text = ""
+            Button5.Enabled = False
+        End If
+
     End Sub
 
     Private Sub TimerControl_Tick(sender As Object, e As EventArgs) Handles TimerControl.Tick
@@ -945,6 +956,15 @@ BUTTON:
             SpecificGame.Text = Path.GetFileNameWithoutExtension(browsefiledialog1.FileName)
             CheckBox1.Checked = True
         End If
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        SetPadMednafen = True
+        ReadParameter()
+        Dim remCons() As String = MedPar.Split(".")
+        MedPar = remCons(0) & "." & remCons(1) & "." & remCons(2) & " " & remCons(3)
+
+        LaunchPar()
     End Sub
 
     Private Sub MedMouse()

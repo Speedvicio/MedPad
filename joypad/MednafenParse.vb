@@ -244,10 +244,19 @@ AGAIN:
                 While Not reader.EndOfStream
                     row = reader.ReadLine
                     count += 1
-                    If row.Contains(";" & MedPad.ComboConsole.Text & ", " & MedPad.ComboPort.Text & ", " & MedPad.ComboPad.Text & ": " & MedPad.PadInputName.SelectedItem.ToString) Then
-                        Exit While
+
+                    If MedPad.SetPadMednafen = True Then
+                        If row.Contains(";" & MedPad.ComboConsole.Text & ", " & MedPad.ComboPort.Text & ", " & MedPad.ComboPad.Text & ": ") Then
+                            Exit While
+                        End If
+                    Else
+                        If row.Contains(";" & MedPad.ComboConsole.Text & ", " & MedPad.ComboPort.Text & ", " & MedPad.ComboPad.Text & ": " & MedPad.PadInputName.SelectedItem.ToString) Then
+                            Exit While
+                        End If
                     End If
+
                 End While
+
                 reader.Dispose()
                 reader.Close()
             End Using
@@ -255,6 +264,8 @@ AGAIN:
             MedPad.MedPar = "-" & (splitpar(0))
         Catch
         End Try
+
+        MedPad.SetPadMednafen = False
     End Sub
 
     Public Function readNthLine(fileAndPath As String, lineNumber As Integer) As String

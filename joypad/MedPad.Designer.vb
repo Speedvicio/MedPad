@@ -74,6 +74,8 @@ Partial Class MedPad
         Me.PictureRAxys = New System.Windows.Forms.PictureBox()
         Me.PictureAxys = New System.Windows.Forms.PictureBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.SpecificGame = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -189,7 +191,7 @@ Partial Class MedPad
         '
         Me.SpecialInput.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UnassignedAllInputToolStripMenuItem, Me.RemoveThisPadFromConfigToolStripMenuItem})
         Me.SpecialInput.Name = "SpecialInput"
-        Me.SpecialInput.Size = New System.Drawing.Size(235, 70)
+        Me.SpecialInput.Size = New System.Drawing.Size(235, 48)
         '
         'UnassignedAllInputToolStripMenuItem
         '
@@ -587,6 +589,8 @@ Partial Class MedPad
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.Button5)
+        Me.GroupBox3.Controls.Add(Me.Label8)
         Me.GroupBox3.Controls.Add(Me.CheckBox3)
         Me.GroupBox3.Controls.Add(Me.CheckBox2)
         Me.GroupBox3.Controls.Add(Me.Button4)
@@ -615,6 +619,27 @@ Partial Class MedPad
         Me.GroupBox3.TabIndex = 42
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Mednafen Input Configurator"
+        '
+        'Button5
+        '
+        Me.Button5.Enabled = False
+        Me.Button5.Location = New System.Drawing.Point(9, 331)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(175, 23)
+        Me.Button5.TabIndex = 63
+        Me.Button5.Text = "Set On &Mednafen"
+        Me.ToolTip1.SetToolTip(Me.Button5, "Enable this Input Device on Mednafen")
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Label8
+        '
+        Me.Label8.ForeColor = System.Drawing.Color.Firebrick
+        Me.Label8.Location = New System.Drawing.Point(9, 288)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(175, 37)
+        Me.Label8.TabIndex = 62
+        Me.Label8.Text = "..."
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'SpecificGame
         '
@@ -800,4 +825,6 @@ Partial Class MedPad
     Friend WithEvents UnassignedAllInputToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RemoveThisPadFromConfigToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CheckBox3 As CheckBox
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Button5 As Button
 End Class

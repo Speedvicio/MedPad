@@ -268,6 +268,32 @@ AGAIN:
         MedPad.SetPadMednafen = False
     End Sub
 
+    Public Sub DefaultController()
+        Dim row As String
+        Try
+            Using reader As New StreamReader(MedPad.MedPath & "\" & MedPad.DMedConf & ".cfg")
+
+                While Not reader.EndOfStream
+                    row = reader.ReadLine
+                    If row.Contains(";Input device for " & MedPad.ComboPort.Text) Then
+                        row = reader.ReadLine
+                        If row.Contains(MedPad.ComboConsole.Text & ".") Then
+                            Dim Srow() As String = row.Split(" ")
+                            MedPad.Label10.Text = Srow(1) & " is the default " & vbCrLf &
+            MedPad.ComboConsole.Text & " pad on " & MedPad.ComboPort.Text
+                            Exit While
+                        End If
+                    End If
+                End While
+
+                reader.Dispose()
+                reader.Close()
+            End Using
+        Catch
+        End Try
+
+    End Sub
+
     Public Function readNthLine(fileAndPath As String, lineNumber As Integer) As String
         Dim nthLine As String = Nothing
         Dim n As Integer

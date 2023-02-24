@@ -650,13 +650,15 @@ BUTTON:
     End Sub
 
     Private Sub ComboPad_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboPad.SelectedIndexChanged
+        Label10.Text = ""
         ParseNameListInput()
         ControlSpecificFileExist()
         AssignedInputValue()
+        DefaultController()
 
         If ComboPad.Items.Count > 1 Then
             Label8.Text = "Enable " & ComboPad.Text & " as default " & vbCrLf &
-            UCase(ComboConsole.Text) & " pad on " & ComboPort.Text
+            ComboConsole.Text & " pad on " & ComboPort.Text
             Button5.Enabled = True
         Else
             Label8.Text = ""
@@ -965,6 +967,11 @@ BUTTON:
         MedPar = remCons(0) & "." & remCons(1) & "." & remCons(2) & " " & remCons(3)
 
         LaunchPar()
+        MsgBox("Default " & ComboConsole.Text & " input assigned", MsgBoxStyle.Information + vbOKOnly, "Pad assigned..")
+
+        Label10.Text = ComboPad.Text & " is the default " & vbCrLf &
+            ComboConsole.Text & " pad on " & ComboPort.Text
+        Button5.Enabled = False
     End Sub
 
     Private Sub MedMouse()

@@ -50,6 +50,7 @@ Partial Class MedPad
         Me.ComboConsole = New System.Windows.Forms.ComboBox()
         Me.ListBox2 = New System.Windows.Forms.ListBox()
         Me.CheckBox3 = New System.Windows.Forms.CheckBox()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -74,7 +75,7 @@ Partial Class MedPad
         Me.PictureRAxys = New System.Windows.Forms.PictureBox()
         Me.PictureAxys = New System.Windows.Forms.PictureBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.SpecificGame = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -336,6 +337,17 @@ Partial Class MedPad
         Me.CheckBox3.UseVisualStyleBackColor = True
         Me.CheckBox3.Visible = False
         '
+        'Button5
+        '
+        Me.Button5.Enabled = False
+        Me.Button5.Location = New System.Drawing.Point(9, 318)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(175, 23)
+        Me.Button5.TabIndex = 63
+        Me.Button5.Text = "Set On &Mednafen"
+        Me.ToolTip1.SetToolTip(Me.Button5, "Enable this Input Device on Mednafen")
+        Me.Button5.UseVisualStyleBackColor = True
+        '
         'Label19
         '
         Me.Label19.AutoSize = True
@@ -589,6 +601,7 @@ Partial Class MedPad
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.Label10)
         Me.GroupBox3.Controls.Add(Me.Button5)
         Me.GroupBox3.Controls.Add(Me.Label8)
         Me.GroupBox3.Controls.Add(Me.CheckBox3)
@@ -620,26 +633,27 @@ Partial Class MedPad
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Mednafen Input Configurator"
         '
-        'Button5
+        'Label10
         '
-        Me.Button5.Enabled = False
-        Me.Button5.Location = New System.Drawing.Point(9, 331)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(175, 23)
-        Me.Button5.TabIndex = 63
-        Me.Button5.Text = "Set On &Mednafen"
-        Me.ToolTip1.SetToolTip(Me.Button5, "Enable this Input Device on Mednafen")
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.ForeColor = System.Drawing.Color.DarkGreen
+        Me.Label10.Location = New System.Drawing.Point(9, 344)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(175, 27)
+        Me.Label10.TabIndex = 64
+        Me.Label10.Text = "..."
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         '
         'Label8
         '
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.ForeColor = System.Drawing.Color.Firebrick
         Me.Label8.Location = New System.Drawing.Point(9, 288)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(175, 37)
+        Me.Label8.Size = New System.Drawing.Size(175, 27)
         Me.Label8.TabIndex = 62
         Me.Label8.Text = "..."
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         '
         'SpecificGame
         '
@@ -827,4 +841,5 @@ Partial Class MedPad
     Friend WithEvents CheckBox3 As CheckBox
     Friend WithEvents Label8 As Label
     Friend WithEvents Button5 As Button
+    Friend WithEvents Label10 As Label
 End Class

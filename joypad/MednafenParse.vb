@@ -279,7 +279,7 @@ AGAIN:
                         row = reader.ReadLine
                         If row.Contains(MedPad.ComboConsole.Text & ".") Then
                             Dim Srow() As String = row.Split(" ")
-                            MedPad.Label10.Text = Srow(1) & " is the default " & vbCrLf &
+                            MedPad.Label10.Text = StrConv(Srow(1), VbStrConv.ProperCase) & " is the default " & vbCrLf &
             MedPad.ComboConsole.Text & " pad on " & MedPad.ComboPort.Text
                             Exit While
                         End If

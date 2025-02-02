@@ -25,6 +25,8 @@ Partial Public Class MedPad
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        If Directory.Exists(Path.Combine(Application.StartupPath, "dbpad")) = False Then Directory.CreateDirectory(Path.Combine(Application.StartupPath, "dbpad"))
+
         If File.Exists(Path.Combine(Application.StartupPath, "mm.txt")) Then
             ComboConsole.Items.Clear()
             Dim reader As StreamReader = My.Computer.FileSystem.OpenTextFileReader(Path.Combine(Application.StartupPath, "mm.txt"))
@@ -76,6 +78,9 @@ INMEDNAFEN:
             ControlSpecificFileExist()
         End If
 
+        'Input_Template non è utile per l'utente normale, l'ho aggiunto per una mia convenienza,
+        ' e per ottenere gli input base del mednafen
+        'Input_Template()
     End Sub
 
     Private Sub ParseCommandLineArgs()
@@ -91,9 +96,13 @@ INMEDNAFEN:
                     If File.Exists(s.Remove(0, inputArgument.Length) & "\mednafen.cfg") Then
                         DMedConf = "mednafen"
                         Mousecode = "0x0 "
+                        GroupBox1.Enabled = True
                     ElseIf File.Exists(s.Remove(0, inputArgument.Length) & "\mednafen-09x.cfg") Then
                         DMedConf = "mednafen-09x"
                         Mousecode = "0000000000000000 "
+                        GroupBox1.Enabled = True
+                    Else
+                        GroupBox1.Enabled = False
                     End If
 
                     MCF.Text = s.Remove(0, inputArgument.Length) & "\" & DMedConf & ".cfg"
@@ -650,6 +659,13 @@ BUTTON:
     End Sub
 
     Private Sub ComboPad_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboPad.SelectedIndexChanged
+
+        If ComboPad.Text = "DualShock" Then
+            pConfig.Enabled = True
+        Else
+            pConfig.Enabled = False
+        End If
+
         Label10.Text = ""
         ParseNameListInput()
         ControlSpecificFileExist()
@@ -694,8 +710,12 @@ BUTTON:
 
         If File.Exists(MedPath & "\mednafen.cfg") Then
             DMedConf = "mednafen"
+            GroupBox1.Enabled = True
         ElseIf File.Exists(MedPath & "\mednafen-09x.cfg") Then
             DMedConf = "mednafen-09x"
+            GroupBox1.Enabled = True
+        Else
+            GroupBox1.Enabled = False
         End If
 
         If File.Exists(MedPath & "\mednafen.exe") = True Then
@@ -703,6 +723,7 @@ BUTTON:
             ParseJoypad()
         Else
             MCF.Text = ""
+            GroupBox1.Enabled = False
         End If
     End Sub
 
@@ -972,6 +993,72 @@ BUTTON:
         Label10.Text = ComboPad.Text & " is the default " & vbCrLf &
             ComboConsole.Text & " pad on " & ComboPort.Text
         Button5.Enabled = False
+    End Sub
+
+    Private Sub pConfig_Click(sender As Object, e As EventArgs) Handles pConfig.Click
+        Dim Mpadname, RealPname As String
+        If ListBox2.SelectedIndex > -1 Then
+            Dim spad() As String = ListBox2.SelectedItem.ToString.Split("-")
+            RealPname = spad(1).Trim
+            Mpadname = Replace(spad(0).Trim, "ID: ", "")
+        Else
+            Exit Sub
+        End If
+
+        Dim filepath As String = (Path.Combine(Application.StartupPath, "dbpad\" & Mpadname) & ".txt")
+        If Not File.Exists(filepath) Then
+            File.Create(filepath).Dispose()
+        End If
+
+        Dim InputList As New List(Of String)
+        For i = 0 To PadInputName.Items.Count - 1
+            InputList.Add(PadInputName.Items(i).ToString() & " = " & Replace(InputAlreadyAssigned.Items(i).ToString(), " ", " " & Mpadname & " "))
+        Next
+        InputList.Sort()
+
+        Using sw As New StreamWriter(filepath)
+            sw.WriteLine("MednafenID = " & ListBox2.SelectedItem.ToString.Trim)
+            sw.WriteLine("DirectXGUID = " & ListBox1.SelectedItem.ToString.Trim & vbCrLf)
+
+            For Each item As String In InputList
+                If item.Contains("Rapid") = False Then sw.WriteLine(item)
+            Next
+
+            sw.Flush()
+            sw.Close()
+        End Using
+        MsgBox("Pre-config file created, please share it on medguir discord channel or on mednafen/medguir topic", MsgBoxStyle.OkOnly, "Pre-config..")
+        Process.Start(Path.Combine(Application.StartupPath, "dbpad"))
+    End Sub
+
+    Private Sub Input_Template()
+
+        Using sw As New StreamWriter((Path.Combine(Application.StartupPath, "dbpad\mit.txt")))
+            sw.WriteLine("-- Base input template used by mednafen --")
+
+            Dim myTextFile = File.ReadAllLines(MCF.Text)
+
+            For Each word As String In myTextFile
+                Dim Cword() As String = word.Split(".")
+                Dim cword1 As String
+                If word.Contains(".input.") Then
+                    If word.Contains(".gamepad.") Or word.Contains(".gamepad6.") Or word.Contains(".dualshock.") Or word.Contains(".3dpad.") Or word.Contains(".joystick.") Then
+                        If word.Contains(".port1.") Or word.Contains(".builtin.") Then
+                            Dim wordS() As String = word.Split(" ")
+                            If Cword(0) <> cword1 Then
+                                sw.WriteLine(vbCrLf & "<<Configuration for " & UCase(Cword(0)) & " input module>>" & vbCrLf)
+                                cword1 = Cword(0)
+                            End If
+                            If Cword.Length <= 5 Then
+                                sw.WriteLine(Replace(wordS(0), "port1", "portX") & " = ")
+                            End If
+                        End If
+                    End If
+                End If
+            Next
+            sw.Flush()
+            sw.Close()
+        End Using
     End Sub
 
     Private Sub MedMouse()

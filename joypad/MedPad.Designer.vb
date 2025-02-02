@@ -54,6 +54,7 @@ Partial Class MedPad
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.pConfig = New System.Windows.Forms.Button()
         Me.JButtons = New System.Windows.Forms.Label()
         Me.PictureMouse = New System.Windows.Forms.PictureBox()
         Me.JPov = New System.Windows.Forms.Label()
@@ -159,6 +160,7 @@ Partial Class MedPad
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.ListBox1)
+        Me.GroupBox1.Enabled = False
         Me.GroupBox1.Location = New System.Drawing.Point(548, 12)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(471, 139)
@@ -368,6 +370,7 @@ Partial Class MedPad
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.pConfig)
         Me.GroupBox2.Controls.Add(Me.JButtons)
         Me.GroupBox2.Controls.Add(Me.PictureMouse)
         Me.GroupBox2.Controls.Add(Me.JPov)
@@ -393,6 +396,16 @@ Partial Class MedPad
         Me.GroupBox2.TabIndex = 39
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Input Tester"
+        '
+        'pConfig
+        '
+        Me.pConfig.Enabled = False
+        Me.pConfig.Location = New System.Drawing.Point(361, 186)
+        Me.pConfig.Name = "pConfig"
+        Me.pConfig.Size = New System.Drawing.Size(100, 23)
+        Me.pConfig.TabIndex = 58
+        Me.pConfig.Text = "Pre-&config"
+        Me.pConfig.UseVisualStyleBackColor = True
         '
         'JButtons
         '
@@ -492,7 +505,7 @@ Partial Class MedPad
         'RYAxis
         '
         Me.RYAxis.AutoSize = True
-        Me.RYAxis.Location = New System.Drawing.Point(358, 221)
+        Me.RYAxis.Location = New System.Drawing.Point(358, 238)
         Me.RYAxis.Name = "RYAxis"
         Me.RYAxis.Size = New System.Drawing.Size(41, 13)
         Me.RYAxis.TabIndex = 49
@@ -502,7 +515,7 @@ Partial Class MedPad
         'RXAxis
         '
         Me.RXAxis.AutoSize = True
-        Me.RXAxis.Location = New System.Drawing.Point(358, 196)
+        Me.RXAxis.Location = New System.Drawing.Point(358, 213)
         Me.RXAxis.Name = "RXAxis"
         Me.RXAxis.Size = New System.Drawing.Size(41, 13)
         Me.RXAxis.TabIndex = 48
@@ -842,4 +855,5 @@ Partial Class MedPad
     Friend WithEvents Label8 As Label
     Friend WithEvents Button5 As Button
     Friend WithEvents Label10 As Label
+    Friend WithEvents pConfig As Button
 End Class

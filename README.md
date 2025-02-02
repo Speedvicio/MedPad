@@ -1,5 +1,5 @@
 # MedPad
-Small utility to manage Mednafen input setting.
+Small utility to manage [Mednafen](https://mednafen.github.io/) input setting.
 
 **MedPad** is a standalone "appendix" developed as plugin to MedGui Reborn.<br>
 By MedPad you can configure all controller supported by Mednafen, through a graphical interface.<br>

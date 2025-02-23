@@ -109,6 +109,12 @@
     </Compile>
     <Compile Include="PerGameConfig.vb" />
     <Compile Include="pnp.vb" />
+    <Compile Include="PreconfiguredPad.Designer.vb">
+      <DependentUpon>PreconfiguredPad.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PreconfiguredPad.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Server.Designer.vb">
       <DependentUpon>Server.vb</DependentUpon>
     </Compile>
@@ -127,6 +133,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreconfiguredPad.resx">
+      <DependentUpon>PreconfiguredPad.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Server.resx">
       <DependentUpon>Server.vb</DependentUpon>

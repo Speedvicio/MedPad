@@ -641,6 +641,15 @@ BUTTON:
                 PadInputName.SetItemChecked(i, False)
             Next
         End If
+
+        If File.Exists(Path.Combine(Application.StartupPath, "dbpad\" & UniqueId) & ".txt") And ListBox2.SelectedItem.ToString.Contains(UniqueId) Then
+            Dim ExistDBPad = MsgBox("There is a pre-configured pad template" & vbCrLf &
+                                    "Do you want to use it?", vbYesNo + MsgBoxStyle.Information, "Pre-configured Game Input Detected...")
+            If ExistDBPad = MsgBoxResult.Yes Then
+                PreconfiguredPad.ShowDialog()
+            End If
+        End If
+
     End Sub
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboConsole.SelectedIndexChanged
@@ -1117,5 +1126,4 @@ BUTTON:
     Private Sub InputAlreadyAssigned_SelectedIndexChanged(sender As Object, e As EventArgs) Handles InputAlreadyAssigned.SelectedIndexChanged
         TransKeyToScan_Code(InputAlreadyAssigned.SelectedItem.ToString)
     End Sub
-
 End Class

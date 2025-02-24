@@ -45,9 +45,9 @@ Public Class PreconfiguredPad
             End While
         End Using
         If File.Exists(Replace(MedPad.MCF.Text, "mednafen.cfg", "mednafen_pad_configured.cfg")) Then
-            MsgBox("All mednafen module configured for pad:" & vbCrLf &
-                   MedPad.ListBox1.SelectedItem.ToString.Trim & vbCrLf &
-                   "For player " & NumericUpDown1.Value, vbOKOnly + MsgBoxStyle.Information, "Pad template applied")
+            Dim npad() As String = MedPad.ListBox1.SelectedItem.ToString.Split("GUID")
+            MsgBox("All mednafen module configured on: " & npad(0).Trim & vbCrLf &
+                   "For player: " & NumericUpDown1.Value, vbOKOnly + MsgBoxStyle.Information, "Pad template applied")
         End If
     End Function
 
@@ -68,10 +68,10 @@ Public Class PreconfiguredPad
                         lineToWrite = filter & replacer
                     End If
 
-                    sw.WriteLine(lineToWrite) 'Writing lineToWrite to the new file
+                    sw.WriteLine(lineToWrite)
 
-                    PreviousLine = CurrentLine 'Future previous line
-                    CurrentLine = sr.ReadLine 'Reading the line for the next iteration
+                    PreviousLine = CurrentLine
+                    CurrentLine = sr.ReadLine 
                 Loop
             End Using
         End Using

@@ -44,6 +44,11 @@ Public Class PreconfiguredPad
                 End If
             End While
         End Using
+        If File.Exists(Replace(MedPad.MCF.Text, "mednafen.cfg", "mednafen_pad_configured.cfg")) Then
+            MsgBox("All mednafen module configured for pad:" & vbCrLf &
+                   MedPad.ListBox1.SelectedItem.ToString.Trim & vbCrLf &
+                   "For player " & NumericUpDown1.Value, vbOKOnly + MsgBoxStyle.Information, "Pad template applied")
+        End If
     End Function
 
     Private Function Create_OConfig(source As String, filter As String, replacer As String)

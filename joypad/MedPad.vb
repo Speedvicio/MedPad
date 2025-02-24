@@ -1022,8 +1022,11 @@ BUTTON:
         End If
 
         Dim InputList As New List(Of String)
+        Dim rvPad As String
         For i = 0 To PadInputName.Items.Count - 1
-            InputList.Add(PadInputName.Items(i).ToString() & " = " & Replace(InputAlreadyAssigned.Items(i).ToString(), " ", " " & Mpadname & " "))
+            rvPad = Replace(InputAlreadyAssigned.Items(i).ToString(), " ", " " & Mpadname & " ")
+            If InputAlreadyAssigned.Items(i).ToString().Contains("Not Setted") Then rvPad = ""
+            InputList.Add(PadInputName.Items(i).ToString() & " = " & rvPad)
         Next
         InputList.Sort()
 

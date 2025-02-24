@@ -48,6 +48,7 @@ Public Class PreconfiguredPad
             Dim npad() As String = MedPad.ListBox1.SelectedItem.ToString.Split("GUID")
             MsgBox("All mednafen module configured on: " & npad(0).Trim & vbCrLf &
                    "For player: " & NumericUpDown1.Value, vbOKOnly + MsgBoxStyle.Information, "Pad template applied")
+            File.Delete(Replace(MedPad.MCF.Text, "mednafen.cfg", "mednafen_pad_configured.cfg_bak"))
         End If
     End Function
 

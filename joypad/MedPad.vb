@@ -642,11 +642,13 @@ BUTTON:
             Next
         End If
 
-        If File.Exists(Path.Combine(Application.StartupPath, "dbpad\" & UniqueId) & ".txt") And ListBox2.SelectedItem.ToString.Contains(UniqueId) Then
-            Dim ExistDBPad = MsgBox("There is a pre-configured pad template" & vbCrLf &
-                                    "Do you want to use it?", vbYesNo + MsgBoxStyle.Information, "Pre-configured Game Input Detected...")
-            If ExistDBPad = MsgBoxResult.Yes Then
-                PreconfiguredPad.ShowDialog()
+        If UniqueId IsNot Nothing Then
+            If File.Exists(Path.Combine(Application.StartupPath, "dbpad\" & UniqueId) & ".txt") And ListBox2.SelectedItem.ToString.Contains(UniqueId) Then
+                Dim ExistDBPad = MsgBox("There is a pre-configured pad template" & vbCrLf &
+                                        "Do you want to use it?", vbYesNo + MsgBoxStyle.Information, "Pre-configured Game Input Detected...")
+                If ExistDBPad = MsgBoxResult.Yes Then
+                    PreconfiguredPad.ShowDialog()
+                End If
             End If
         End If
 
@@ -669,7 +671,7 @@ BUTTON:
 
     Private Sub ComboPad_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboPad.SelectedIndexChanged
 
-        If ComboPad.Text = "DualShock" Then
+        If ComboPad.Text = "DualShock" And UniqueId <> "" Then
             pConfig.Enabled = True
         Else
             pConfig.Enabled = False

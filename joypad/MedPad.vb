@@ -364,12 +364,18 @@ BUTTON:
     Public Function ConverToMednafen(InputValue As Integer) As String
         Dim InpuToConvert As UInt32
         InpuToConvert = Convert.ToUInt32(InputValue)
+        ConverToMednafen = InpuToConvert.ToString("x8")
+
+        If Total_Input > 20 Then
+            Dim extractnum As String = ConverToMednafen
+            Dim abs_number As Integer = Val(extractnum(extractnum.Length - 1))
+            If abs_number > 2 Then ConverToMednafen = ConverToMednafen.Substring(0, ConverToMednafen.Length - 1) & (abs_number + 2).ToString
+        End If
+
         If DMedConf = "mednafen-09x" Then
-            ConverToMednafen = InpuToConvert.ToString("x8")
         Else
             Select Case InputValue
                 Case >= 32768
-                    ConverToMednafen = InpuToConvert.ToString("x8")
                     If ConverToMednafen.Contains("0000800") Then
                         ConverToMednafen = Replace(ConverToMednafen, "0000800", "abs_") & "+"
                     ElseIf ConverToMednafen.Contains("0000c00") Then

@@ -13,11 +13,12 @@ Partial Public Class MedPad
     Public MedPar, MedPath, UniqueId, PadType, ConfigPath As String
     Public specificfile, console, portpad As String
     Private SliderCount As Integer
-    Private DevCaps As SlimDX.DirectInput.Capabilities
+    Public DevCaps As SlimDX.DirectInput.Capabilities
     Dim dinput As New DirectInput()
     Dim PadGUID As Guid
     Dim Mousecode As String
     Dim assigned As Boolean
+    Dim Total_Input As Integer
     Private fattemp = True
     Public SetPadMednafen As Boolean
     Public firststart As Boolean
@@ -128,6 +129,7 @@ INMEDNAFEN:
 
         If ListBox1.SelectedItem <> "Mouse" Then PadType = "joystick"
         Dim strText As String = Nothing
+
 AXIS:
         XAxys.Text = state.X.ToString(CultureInfo.CurrentCulture)
         PXAxys.Value = state.X.ToString(CultureInfo.CurrentCulture) + 1000
@@ -442,12 +444,16 @@ BUTTON:
 
         joystick.Acquire()
 
+        DevCaps = joystick.Capabilities
+        Total_Input = DevCaps.AxesCount + DevCaps.ButtonCount + DevCaps.PovCount
+
         TimerXInput.Stop()
         TimerDInput.Interval = 1000 \ 24
         TimerDInput.Start()
     End Sub
 
     Private Sub Unlocking(ByVal d As DeviceObjectInstance)
+        numPOVs = Nothing
         If ObjectGuid.XAxis = d.ObjectTypeGuid Then
             XAxys.Enabled = True
             PictureAxys.Enabled = True
@@ -566,6 +572,7 @@ BUTTON:
         Else
             Lock()
         End If
+
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click

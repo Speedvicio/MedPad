@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports SlimDX.DirectInput
 Imports SlimDX.XInput
 
 Module GXInput
@@ -6,15 +7,14 @@ Module GXInput
     Public Xstate As New State
 
     Public Sub CreateXInput()
-
         gamepad = New Controller(MedPad.ListBox1.SelectedIndex)
-
         MedPad.ReleaseDevice()
         MedPad.TimerXInput.Interval = 1000 \ 24
         MedPad.TimerXInput.Start()
     End Sub
 
     Public Sub UpdateXInput()
+
         If MedPad.ListBox1.SelectedItem <> "Mouse" Then MedPad.PadType = "joystick"
 
 LEFTSTICK:

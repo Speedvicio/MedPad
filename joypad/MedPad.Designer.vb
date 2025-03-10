@@ -194,20 +194,20 @@ Partial Class MedPad
         '
         Me.SpecialInput.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UnassignedAllInputToolStripMenuItem, Me.RemoveThisPadFromConfigToolStripMenuItem})
         Me.SpecialInput.Name = "SpecialInput"
-        Me.SpecialInput.Size = New System.Drawing.Size(235, 48)
+        Me.SpecialInput.Size = New System.Drawing.Size(236, 48)
         '
         'UnassignedAllInputToolStripMenuItem
         '
         Me.UnassignedAllInputToolStripMenuItem.Enabled = False
         Me.UnassignedAllInputToolStripMenuItem.Name = "UnassignedAllInputToolStripMenuItem"
-        Me.UnassignedAllInputToolStripMenuItem.Size = New System.Drawing.Size(234, 22)
+        Me.UnassignedAllInputToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
         Me.UnassignedAllInputToolStripMenuItem.Text = "&Unassigned All Input"
         '
         'RemoveThisPadFromConfigToolStripMenuItem
         '
         Me.RemoveThisPadFromConfigToolStripMenuItem.Enabled = False
         Me.RemoveThisPadFromConfigToolStripMenuItem.Name = "RemoveThisPadFromConfigToolStripMenuItem"
-        Me.RemoveThisPadFromConfigToolStripMenuItem.Size = New System.Drawing.Size(234, 22)
+        Me.RemoveThisPadFromConfigToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
         Me.RemoveThisPadFromConfigToolStripMenuItem.Text = "&Remove This Pad From Config"
         '
         'Button1
@@ -415,7 +415,7 @@ Partial Class MedPad
         Me.JButtons.ForeColor = System.Drawing.Color.Firebrick
         Me.JButtons.Location = New System.Drawing.Point(295, 270)
         Me.JButtons.Name = "JButtons"
-        Me.JButtons.Size = New System.Drawing.Size(28, 16)
+        Me.JButtons.Size = New System.Drawing.Size(27, 16)
         Me.JButtons.TabIndex = 15
         Me.JButtons.Text = "....."
         Me.JButtons.TextAlign = System.Drawing.ContentAlignment.MiddleCenter

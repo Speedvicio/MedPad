@@ -61,7 +61,7 @@ Partial Class PreconfiguredPad
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(192, 75)
+        Me.ClientSize = New System.Drawing.Size(192, 70)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.NumericUpDown1)
         Me.Controls.Add(Me.Label1)

@@ -5,10 +5,15 @@ Public Class PreconfiguredPad
     Dim PreInput_Value As String
     Dim MedPad_Value As String
     Dim myfile As String
+    Dim Pad_Name As String
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim SplitPadName() As String = Split(MedPad.ListBox2.SelectedItem.ToString, " - ")
+        If SplitPadName.Length > 0 Then Pad_Name = SplitPadName(1).Trim
+
         myfile = MedPad.MCF.Text
         PlayerPAD = ".port" & NumericUpDown1.Value & "."
+        Pad_Name += "_" & NumericUpDown1.Value
         Get_Input_Template()
     End Sub
 
@@ -23,7 +28,7 @@ Public Class PreconfiguredPad
                     If a.Contains(" = " & File_replace) Then
                         Dim MedInputValue As String = Replace(Split_a(0), ".portX.", PlayerPAD)
                         Create_OConfig(myfile, MedInputValue, PreInput_Value)
-                        myfile = Replace(MedPad.MCF.Text, "mednafen.cfg", "mednafen_pad_configured.cfg_bak")
+                        myfile = Replace(MedPad.MCF.Text, "mednafen.cfg", Pad_Name & ".cfg_bak")
                         'MsgBox(Replace(Split_a(0), ".portX.", PlayerPAD) & PreInput_Value)
                     End If
                 End While
@@ -44,16 +49,16 @@ Public Class PreconfiguredPad
                 End If
             End While
         End Using
-        If File.Exists(Replace(MedPad.MCF.Text, "mednafen.cfg", "mednafen_pad_configured.cfg")) Then
+        If File.Exists(Replace(MedPad.MCF.Text, "mednafen.cfg", Pad_Name & ".cfg")) Then
             Dim npad() As String = MedPad.ListBox1.SelectedItem.ToString.Split("GUID")
             MsgBox("All mednafen module configured on: " & npad(0).Trim & vbCrLf &
-                   "For player: " & NumericUpDown1.Value, vbOKOnly + MsgBoxStyle.Information, "Pad template applied")
-            File.Delete(Replace(MedPad.MCF.Text, "mednafen.cfg", "mednafen_pad_configured.cfg_bak"))
+                   "For player: " & NumericUpDown1.Value, vbOKOnly + MsgBoxStyle.Information, Pad_Name & " template applied")
+            File.Delete(Replace(MedPad.MCF.Text, "mednafen.cfg", Pad_Name & ".cfg_bak"))
         End If
     End Function
 
     Private Function Create_OConfig(source As String, filter As String, replacer As String)
-        Dim OutputFile As String = Replace(MedPad.MCF.Text, "mednafen.cfg", "mednafen_pad_configured.cfg")
+        Dim OutputFile As String = Replace(MedPad.MCF.Text, "mednafen.cfg", Pad_Name & ".cfg")
         Dim PreviousLine As String = ""
         Dim CurrentLine As String = ""
         Using sr As StreamReader = New StreamReader(source)
